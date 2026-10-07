@@ -1,0 +1,21 @@
+# Maintainer: openOODA-tools <ops@openooda.org>
+pkgname=ooprovenance-bin
+_pkgname=ooprovenance
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Generates SLSA Build Level 3 provenance manifests for all compiled binaries."
+arch=('x86_64')
+url="https://github.com/openOODA-tools/ooprovenance"
+license=('Apache-2.0')
+depends=('glibc')
+provides=('ooprovenance')
+conflicts=('ooprovenance')
+source_x86_64=("${url}/releases/download/v${pkgver}/ooprovenance-linux-x86_64"
+               "uninstall.sh::https://raw.githubusercontent.com/openOODA-tools/${_pkgname}/v${pkgver}/uninstall.sh")
+sha256sums_x86_64=('SKIP'
+                   'SKIP')
+
+package() {
+    install -Dm755 "${srcdir}/ooprovenance-linux-x86_64" "${pkgdir}/usr/bin/ooprovenance"
+    install -Dm755 uninstall.sh "${pkgdir}/usr/bin/ooprovenance-uninstall"
+}
